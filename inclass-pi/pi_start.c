@@ -68,6 +68,13 @@ static void *work(void *arg) {
     /* TODO (step 3):
      *   1. compute my block of points: n / size, the last rank takes the
      *      remainder;*/
+    /*
+    Can also do this (as shown in-class):
+    uint64_t point = a -> n / a -> size;
+    if (a -> rank == a -> size - 1) {
+        points += a -> n - points * a -> rank;
+    }
+    */
     int num = a -> n / a -> size;
     if (a -> rank == a -> size - 1) {
         num = a -> n - (a -> size - 1) * (a -> n / a -> size);
@@ -81,6 +88,7 @@ static void *work(void *arg) {
     /*
      *   3. count my hits with count_hits and write the count to my own
      *      slot hits[rank]. */
+    /*If you use 'points', do count_hits(&r, points) instead of a -> n.*/
     a -> hits[a -> rank] = count_hits(&r, a -> n);
     return NULL;
     /*(void)a;

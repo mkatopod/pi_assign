@@ -16,6 +16,7 @@ set -e
 echo "node: $(hostname)"
 lscpu | grep -E 'Model name|^CPU\(s\)|Socket'
 gcc --version | head -1
+gcc -O2 -Wall -pthread pi_start.c        -o pi_start
 gcc -O2 -Wall -pthread pi.c        -o pi
 gcc -O2 -Wall -pthread pi_shared.c -o pi_shared
 
